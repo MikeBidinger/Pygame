@@ -7,4 +7,4 @@
   <li>TicTacToe</li>
   <li>PlatformGame</li>
 </ul>
-<p>Special thanks to Tech With Tim and Coding With Russ from YouTube! &1F604;</p>
+<p>Special thanks to Tech With Tim and Coding With Russ from YouTube! &#128521;</p>
