@@ -5,6 +5,6 @@
 <ul>
   <li>Snake &#128013;</li>
   <li>TicTacToe &#10060; &#11093;</li>
-  <li>PlatformGame &#128377;</li>
+  <li>Platformer &#128377;</li>
 </ul>
 <p>Special thanks to Tech With Tim and Coding With Russ from YouTube! &#128521;</p>
