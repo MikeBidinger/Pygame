@@ -172,5 +172,7 @@ if __name__ == "__main__":
                     word_length = word_length[:-1]
                 elif event.unicode.isnumeric():
                     word_length += event.unicode
+                    if word_length not in words_data:
+                        word_length = word_length[:-1]
 
 pygame.quit()
