@@ -10,4 +10,4 @@
   <li>Spelling (Dutch) &#9000;</li>
   <li>Hangman &#10067;</li>
 </ul>
-<p>Special thanks to Tech With Tim and Coding With Russ from YouTube! &#128521;</p>
+<p>Special thanks to YouTubers Tech With Tim and Coding With Russ for sharing the knowledge! &#128521;</p>
