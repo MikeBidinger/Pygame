@@ -1,5 +1,5 @@
 <h1>Pygame</h1>
-<h3>Just some Pygame projects! &#128513;</h3>
+<h3>Just some fun Pygame projects! &#128513;</h3>
 <i>#ILoveToLearn</i>
 <br><br>
 <p>List of projects:</p>
