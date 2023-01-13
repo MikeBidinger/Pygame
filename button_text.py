@@ -9,9 +9,6 @@ GREEN = (0, 200, 0)
 BLUE = (0, 0, 200)
 DEF_BUTTON = (200, 200, 200)
 
-# Define global variable
-counter = 0
-
 
 class States():
     def __init__(self):
@@ -45,19 +42,17 @@ def lighten_rgb(rgb_val, ratio=2, steps=4):
 
 
 class Button():
-    def __init__(self, x, y, width, height, text, font, value, 
-                 btn_col=DEF_BUTTON, border_px=2, shading=True):
-        # Rectangle
-        self.rect = pygame.Rect(x, y, width, height)
-        # State
-        self.state = BUTTON_STATES.normal
-        # Text
+    def __init__(self, text, font, value,
+                 btn_col=DEF_BUTTON, border_px=0, shading=False):
+        self.rect = None
+        self.state = None
         self.text = text
         self.font = font
-        # Value
         self.value = value
-        # Colors
         self.button_col = btn_col
+        self.border_px = border_px
+        self.shading = shading
+        # Set colors
         self.darken_effect = False
         for i in self.button_col:
             if i > 128:
@@ -73,11 +68,12 @@ class Button():
             self.border_color = invert_rgb((0, 0, 0))
             self.hover_col = lighten_rgb(self.button_col)
             self.press_col = lighten_rgb(self.button_col, 3)
-        # Border (shading)
-        self.border_thickness = border_px
-        self.shading = shading
 
-    def draw_button(self, surface):
+    def create(self, x, y, width, height):
+        self.rect = pygame.Rect(x, y, width, height)
+        self.state = BUTTON_STATES.normal
+
+    def draw(self, surface):
         action = False
         # Get mouse position
         pos = pygame.mouse.get_pos()
@@ -100,23 +96,24 @@ class Button():
         elif self.state == BUTTON_STATES.pressed:
             pygame.draw.rect(surface, self.press_col, self.rect)
         # Draw border (state and shading dependent)
-        if self.shading:
-            top_left = WHITE
-            bottom_right = BLACK
-        else:
-            top_left = self.border_color
-            bottom_right = self.border_color
-        if self.state == BUTTON_STATES.hover or self.state == BUTTON_STATES.pressed:
-            top_left = invert_rgb(top_left)
-            bottom_right = invert_rgb(bottom_right)
-        pygame.draw.line(surface, top_left, (self.rect.x, self.rect.y),
-                         (self.rect.x + self.rect.width, self.rect.y), self.border_thickness)
-        pygame.draw.line(surface, top_left, (self.rect.x, self.rect.y),
-                         (self.rect.x, self.rect.y + self.rect.height), self.border_thickness)
-        pygame.draw.line(surface, bottom_right, (self.rect.x, self.rect.y + self.rect.height),
-                         (self.rect.x + self.rect.width, self.rect.y + self.rect.height), self.border_thickness)
-        pygame.draw.line(surface, bottom_right, (self.rect.x + self.rect.width, self.rect.y),
-                         (self.rect.x + self.rect.width, self.rect.y + self.rect.height), self.border_thickness)
+        if self.border_px:
+            if self.shading:
+                top_left = WHITE
+                bottom_right = BLACK
+            else:
+                top_left = self.border_color
+                bottom_right = self.border_color
+            if self.state == BUTTON_STATES.hover or self.state == BUTTON_STATES.pressed:
+                top_left = invert_rgb(top_left)
+                bottom_right = invert_rgb(bottom_right)
+            pygame.draw.line(surface, top_left, (self.rect.x, self.rect.y),
+                             (self.rect.x + self.rect.width, self.rect.y), self.border_px)
+            pygame.draw.line(surface, top_left, (self.rect.x, self.rect.y),
+                             (self.rect.x, self.rect.y + self.rect.height), self.border_px)
+            pygame.draw.line(surface, bottom_right, (self.rect.x, self.rect.y + self.rect.height),
+                             (self.rect.x + self.rect.width, self.rect.y + self.rect.height), self.border_px)
+            pygame.draw.line(surface, bottom_right, (self.rect.x + self.rect.width, self.rect.y),
+                             (self.rect.x + self.rect.width, self.rect.y + self.rect.height), self.border_px)
         # Draw text (state dependent)
         col_val = self.text_col
         if self.state == BUTTON_STATES.hover or self.state == BUTTON_STATES.pressed:
