@@ -45,7 +45,7 @@ def lighten_rgb(rgb_val, ratio=2, steps=4):
 
 
 class Button():
-    def __init__(self, width, height, x, y, text, font, value, 
+    def __init__(self, x, y, width, height, text, font, value, 
                  btn_col=DEF_BUTTON, border_px=2, shading=True):
         # Rectangle
         self.rect = pygame.Rect(x, y, width, height)
